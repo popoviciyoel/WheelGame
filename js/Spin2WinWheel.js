@@ -319,7 +319,13 @@ function Spin2WinWheel() {
 
       var temp = [];
       for (var i = 0; i < segmentValuesArray.length; i++) {
-        temp.push(segmentValuesArray[i].value);
+        if (segmentValuesArray[i].type == "image") {
+          temp.push(
+            "https://res.cloudinary.com/shulgirit/image/upload/v1633870457/wiply/Platform%20Default%20Images/wheel/tax_free_ftvgua.png"
+          );
+        } else {
+          temp.push(segmentValuesArray[i].value);
+        }
       }
 
       addValues(
@@ -366,7 +372,7 @@ function Spin2WinWheel() {
           //   ig.setAttributeNS(xlinkns, "xlink:href", segmentValuesArray[i].value);
           var img = prize[i]
             ? prize[i].replace(/['"]+/g, "")
-            : segmentValuesArray[i].value;
+            : "https://res.cloudinary.com/shulgirit/image/upload/v1633870457/wiply/Platform%20Default%20Images/wheel/tax_free_ftvgua.png";
           ig.setAttributeNS(xlinkns, "xlink:href", img);
         } else if (segmentValuesArray[i].type == "string") {
           var t = document.createElementNS(xmlns, "text");

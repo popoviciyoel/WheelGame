@@ -4,10 +4,10 @@
 // let videoConstraints = null;
 // let audioConstraints = null;
 
-let audioTrack = null;
-let videoTrack = null;
-let videoElement = document.getElementById("video");
-let logElement = document.getElementById("log");
+// shuffles value in wheel
+const shuffle = (array) => {
+  return array.sort(() => 0.5 - Math.random());
+};
 
 function buildConstraints() {
   try {
@@ -175,7 +175,7 @@ function init() {
       "#7F8C8D",
     ],
 
-    segmentValuesArray: [
+    segmentValuesArray: shuffle([
       {
         probability: 10,
         type: "image",
@@ -188,8 +188,8 @@ function init() {
       },
       {
         probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-2.png",
+        type: "string",
+        value: "You Lost",
         win: false,
         resultText: "5% הנחה על כל קנייה",
         userData: {
@@ -218,8 +218,8 @@ function init() {
       },
       {
         probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-5.png",
+        type: "string",
+        value: "You Lost",
         win: false,
         resultText: "קניה באתר ללא מע''מ",
         userData: {
@@ -228,15 +228,35 @@ function init() {
       },
       {
         probability: 10,
-        type: "image",
-        value: "./../media/images/1-storage.png",
+        type: "string",
+        value: "You Lost",
         win: false,
         resultText: " הפתעה בכל קנייה",
         userData: {
           score: 0,
         },
       },
-    ],
+      {
+        probability: 10,
+        type: "image",
+        value: "./../media/images/w-text-1.png",
+        win: true,
+        resultText: "  20% הנחה על כל קנייה",
+        userData: {
+          score: 1000000,
+        },
+      },
+      {
+        probability: 10,
+        type: "string",
+        value: "You Lost",
+        win: false,
+        resultText: "5% הנחה על כל קנייה",
+        userData: {
+          score: 0,
+        },
+      },
+    ]),
     svgWidth: 800,
     svgHeight: 800,
     wheelStrokeColor: "#000",
@@ -309,7 +329,10 @@ window.setcolorone = function (color) {
   pp.setColor(color);
 };
 var params3 = new URLSearchParams(window.location.search);
+params3.append("buttonText", "PressHereToPlay");
+
 console.log(params3);
+
 var titleText = params3.get("title");
 var logoImage = params3.get("logoImage");
 var subtitleText = params3.get("subtitle");
@@ -330,8 +353,7 @@ var base = params3.get("base");
 // }
 
 if (buttonText) document.getElementById("button-text").innerText = buttonText;
-// if (!buttonText) document.getElementById("button-text").style.display = "none";
-if (!buttonText) document.getElementById("button-text").innerText = "none";
+if (!buttonText) document.getElementById("button-text").style.display = "none";
 if (base) document.querySelector("#baseWheel").setAttribute("href", base);
 
 // if (image) {
