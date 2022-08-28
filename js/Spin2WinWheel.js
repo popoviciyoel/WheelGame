@@ -321,7 +321,7 @@ function Spin2WinWheel() {
       for (var i = 0; i < segmentValuesArray.length; i++) {
         if (segmentValuesArray[i].type == "image") {
           temp.push(
-            "https://res.cloudinary.com/shulgirit/image/upload/v1633870457/wiply/Platform%20Default%20Images/wheel/tax_free_ftvgua.png"
+            segmentValuesArray[i].value
           );
         } else {
           temp.push(segmentValuesArray[i].value);
@@ -372,7 +372,7 @@ function Spin2WinWheel() {
           //   ig.setAttributeNS(xlinkns, "xlink:href", segmentValuesArray[i].value);
           var img = prize[i]
             ? prize[i].replace(/['"]+/g, "")
-            : "https://res.cloudinary.com/shulgirit/image/upload/v1633870457/wiply/Platform%20Default%20Images/wheel/tax_free_ftvgua.png";
+            : "https://res.cloudinary.com/wiply-yoel/image/upload/v1661688878/youjustlost_o0z84h.jpg";
           ig.setAttributeNS(xlinkns, "xlink:href", img);
         } else if (segmentValuesArray[i].type == "string") {
           var t = document.createElementNS(xmlns, "text");

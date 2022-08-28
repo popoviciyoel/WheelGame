@@ -140,8 +140,117 @@ function myGameEnd(e) {
     Spin2WinWheel?.reset();
   });
 }
+var params3 = new URLSearchParams(window.location.search);
+params3.append("buttonText", "PLAY OUR WHEEL GAME");
+params3.append(
+  "logoImage",
+  "https://res.cloudinary.com/wiply-yoel/image/upload/v1661689172/Prize-Claim-you-won_zsuwx0.png"
+);
+
+console.log(params3);
+
+var titleText = params3.get("title");
+var logoImage = params3.get("logoImage");
+var subtitleText = params3.get("subtitle");
+var buttonText = params3.get("buttonText");
+console.log(buttonText);
+var image = params3.get("image");
+var base = params3.get("base");
 
 function init() {
+
+  const wheel_data = [
+    {
+      probability: 10,
+      type: "image",
+      value: "",
+      win: true,
+      resultText: "  20% הנחה על כל קנייה",
+      userData: {
+        score: 1000000,
+      },
+    },
+    {
+      probability: 10,
+      type: "string",
+      value: "You Lost",
+      win: false,
+      resultText: "5% הנחה על כל קנייה",
+      userData: {
+        score: 0,
+      },
+    },
+    {
+      probability: 10,
+      type: "image",
+      value: "",
+      win: true,
+      resultText: "משלוח חינם",
+      userData: {
+        score: 100,
+      },
+    },
+    {
+      probability: 10,
+      type: "image",
+      value: "",
+      win: true,
+      resultText: "15% הנחה על כל קנייה",
+      userData: {
+        score: 50,
+      },
+    },
+    {
+      probability: 10,
+      type: "string",
+      value: "You Lost",
+      win: false,
+      resultText: "קניה באתר ללא מע''מ",
+      userData: {
+        score: 0,
+      },
+    },
+    {
+      probability: 10,
+      type: "string",
+      value: "You Lost",
+      win: false,
+      resultText: " הפתעה בכל קנייה",
+      userData: {
+        score: 0,
+      },
+    },
+    {
+      probability: 10,
+      type: "image",
+      value: "",
+      win: true,
+      resultText: "  20% הנחה על כל קנייה",
+      userData: {
+        score: 1000000,
+      },
+    },
+    {
+      probability: 10,
+      type: "string",
+      value: "You Lost",
+      win: false,
+      resultText: "5% הנחה על כל קנייה",
+      userData: {
+        score: 0,
+      },
+    },
+  ]
+  
+if(logoImage){
+  for(var i = 0; i < wheel_data.length; i++){
+    if(wheel_data[i].type == "image")
+      wheel_data[i].value = logoImage
+  }
+
+}
+ 
+
   var jsonData = {
     colorArray: [
       "#F4B8DA",
@@ -175,88 +284,7 @@ function init() {
       "#7F8C8D",
     ],
 
-    segmentValuesArray: shuffle([
-      {
-        probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-1.png",
-        win: true,
-        resultText: "  20% הנחה על כל קנייה",
-        userData: {
-          score: 1000000,
-        },
-      },
-      {
-        probability: 10,
-        type: "string",
-        value: "You Lost",
-        win: false,
-        resultText: "5% הנחה על כל קנייה",
-        userData: {
-          score: 0,
-        },
-      },
-      {
-        probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-3.png",
-        win: true,
-        resultText: "משלוח חינם",
-        userData: {
-          score: 100,
-        },
-      },
-      {
-        probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-4.png",
-        win: true,
-        resultText: "15% הנחה על כל קנייה",
-        userData: {
-          score: 50,
-        },
-      },
-      {
-        probability: 10,
-        type: "string",
-        value: "You Lost",
-        win: false,
-        resultText: "קניה באתר ללא מע''מ",
-        userData: {
-          score: 0,
-        },
-      },
-      {
-        probability: 10,
-        type: "string",
-        value: "You Lost",
-        win: false,
-        resultText: " הפתעה בכל קנייה",
-        userData: {
-          score: 0,
-        },
-      },
-      {
-        probability: 10,
-        type: "image",
-        value: "./../media/images/w-text-1.png",
-        win: true,
-        resultText: "  20% הנחה על כל קנייה",
-        userData: {
-          score: 1000000,
-        },
-      },
-      {
-        probability: 10,
-        type: "string",
-        value: "You Lost",
-        win: false,
-        resultText: "5% הנחה על כל קנייה",
-        userData: {
-          score: 0,
-        },
-      },
-    ]),
+    segmentValuesArray: shuffle(wheel_data),
     svgWidth: 800,
     svgHeight: 800,
     wheelStrokeColor: "#000",
@@ -328,18 +356,7 @@ window.onGameLoaded = function () {
 window.setcolorone = function (color) {
   pp.setColor(color);
 };
-var params3 = new URLSearchParams(window.location.search);
-params3.append("buttonText", "PressHereToPlay");
 
-console.log(params3);
-
-var titleText = params3.get("title");
-var logoImage = params3.get("logoImage");
-var subtitleText = params3.get("subtitle");
-var buttonText = params3.get("buttonText");
-console.log(buttonText);
-var image = params3.get("image");
-var base = params3.get("base");
 // var baseLogo = params3.get("baseLogo");
 
 // document.getElementById("title1").innerText = titleText; @wiply remove title
@@ -364,8 +381,9 @@ if (base) document.querySelector("#baseWheel").setAttribute("href", base);
 // }
 
 if (logoImage) {
-  const img2 = document.querySelector("#logo-image-title");
-  img2.src = logoImage;
-  img2.alt = "";
-  img2.style.display = "block";
+
+  // const img2 = document.querySelector("#logo-image-title");
+  // img2.src = logoImage;
+  // img2.alt = "";
+  // img2.style.display = "block";
 }
